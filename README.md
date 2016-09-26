@@ -1,4 +1,7 @@
 blogSymf
 ========
 
-A Symfony project created on September 23, 2016, 9:56 am.
+A Blog Symfony2 project created on September 23, 2016, 9:56 am.
+
+Saifeddine BOUIZDI
+

@@ -52,5 +52,9 @@ class Enquiry {
     public function setBody($body) {
         $this->body = $body;
     }
+    
+    public function getDefaultMail() {
+        return "seifeddine.bouzidi@dhm-it.com";
+    }
 
 }

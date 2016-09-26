@@ -1,3 +1,9 @@
-app:
-    resource: "@AppBundle/Controller/"
-    type:     annotation
+bloggerblog:
+    resource: "@BloggerBlogBundle/Resources/config/routing.yml"
+    prefix:   /
+
+BloggerBlogBundle_about:
+    pattern:  /about
+    defaults: { _controller: BloggerBlogBundle:Page:about }
+    requirements:
+        _method:  GET

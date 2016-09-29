@@ -17,10 +17,9 @@ namespace Blogger\BlogBundle\Tests\Entity;
 use Blogger\BlogBundle\Entity\Enquiry;
 
 class BlogTest extends \PHPUnit_Framework_TestCase {
-
     public function testEmail() {
         $enquiry = new Enquiry();
-        $enquiry->setEmail("saifeddine.bouzidi@gmail.com");
+        $enquiry->setEmail("seifeddine.bouzidi@dhm-it.fr");
         $this->assertEquals('seifeddine.bouzidi@dhm-it.com', $enquiry->getEmail());
     }
 

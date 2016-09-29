@@ -23,6 +23,6 @@ class PageControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/about');
 
-        $this->assertEquals(1, $crawler->filter('h1:contains("About symblog")')->count());
+        $this->assertEquals(1, $crawler->filter('h1:contains("About symblog1")')->count());
     }
 }

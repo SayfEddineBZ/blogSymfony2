@@ -1,0 +1,27 @@
+Blogger\BlogBundle\Entity\Blog:
+    type: entity
+    table: null
+    repositoryClass: Blogger\BlogBundle\Repository\BlogRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            type: string
+            length: 255
+        author:
+            type: string
+            length: 255
+        blog:
+            type: text
+        image:
+            type: string
+            length: 255
+        tags:
+            type: text
+        comments:
+            type: text
+    lifecycleCallbacks: {  }

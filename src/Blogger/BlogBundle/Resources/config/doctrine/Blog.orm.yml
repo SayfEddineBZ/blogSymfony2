@@ -24,4 +24,5 @@ Blogger\BlogBundle\Entity\Blog:
             type: text
         comments:
             type: text
+            nullable: true
     lifecycleCallbacks: {  }

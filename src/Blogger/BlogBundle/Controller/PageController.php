@@ -29,18 +29,18 @@ class PageController extends Controller {
 
             if ($form->isValid()) {
                 $message = \Swift_Message::newInstance()
-                        ->setSubject('Contact from symblog')
+                        ->setSubject('Contact from Dhm blog')
                         ->setFrom($contact->getEmail())
                         ->setTo($this->container->getParameter('blogger_blog.emails.contact_email'))
                         ->setBody($this->renderView('BloggerBlogBundle:Page:contactEmail.txt.twig', array('contact' => $contact)));
-              
+
                 $this->get('mailer')->send($message);
 
 
                 $this->get('session')->getFlashBag()->set('blogger-notice', 'Your contact was successfully sent. Thank you!');
                 // Redirect - This is important to prevent users re-posting
                 // the form if they refresh the page
-               return $this->redirect($this->generateUrl('BloggerBlogBundle_contact'));
+                //return $this->redirect($this->generateUrl('BloggerBlogBundle_contact'));
             }
         }
 
@@ -48,5 +48,7 @@ class PageController extends Controller {
                     'form' => $form->createView()
         ));
     }
+
+    
 
 }

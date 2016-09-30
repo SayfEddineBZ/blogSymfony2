@@ -59,7 +59,7 @@ class Blog
     /**
      * @var array
      *
-     * @ORM\Column(name="comments", type="array")
+     * @ORM\Column(name="comments", type="array",nullable=true)
      */
     private $comments;
 

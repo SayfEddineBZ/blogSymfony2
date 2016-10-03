@@ -6,12 +6,26 @@ namespace Blogger\BlogBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Blogger\BlogBundle\Entity\Contact;
+use Blogger\BlogBundle\Entity\Blog;
 use Blogger\BlogBundle\Form\ContactType;
 
 class PageController extends Controller {
 
     public function indexAction() {
-        return $this->render('BloggerBlogBundle:Page:index.html.twig');
+        $em = $this->getDoctrine()
+                   ->getEntityManager();
+
+        $blogs = $em->createQueryBuilder()
+                    ->select('b')
+                    ->from('BloggerBlogBundle:Blog',  'b')
+                    ->addOrderBy('b.created', 'DESC')
+                    ->getQuery()
+                    ->getResult();
+
+        return $this->render('BloggerBlogBundle:Page:index.html.twig', array(
+            'blogs' => $blogs
+        ));
+        
     }
 
     public function aboutAction() {

@@ -25,4 +25,9 @@ Blogger\BlogBundle\Entity\Blog:
         comments:
             type: text
             nullable: true
+        created:
+            type: datetime
+        
+        updated:
+            type: datetime
     lifecycleCallbacks: {  }

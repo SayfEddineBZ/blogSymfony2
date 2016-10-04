@@ -28,16 +28,21 @@ class BlogAdmin extends AbstractAdmin {
         $formMapper->add('image', 'text');
         $formMapper->add('tags', 'text');
         $formMapper->add('comments', 'text');
-        $formMapper->add('created', 'datetime');
-        $formMapper->add('updated', 'datetime');
+//        $formMapper->add('created', 'datetime');
+//        $formMapper->add('updated', 'datetime');
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper) {
-        $datagridMapper->add('name');
+        $datagridMapper->add('title');
+        $datagridMapper->add('author');
     }
 
     protected function configureListFields(ListMapper $listMapper) {
-        $listMapper->addIdentifier('name');
+        $listMapper->addIdentifier('title');
+        $listMapper->addIdentifier('author');
+        $listMapper->addIdentifier('image');
+        $listMapper->addIdentifier('tags');
+        $listMapper->addIdentifier('comments');
     }
 
 }

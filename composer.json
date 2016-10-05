@@ -26,7 +26,8 @@
         "sonata-project/user-bundle": "^3.0",
         "friendsofsymfony/rest-bundle": "^1.1",
         "nelmio/api-doc-bundle": "^2.13",
-        "sonata-project/google-authenticator": "^1.0"
+        "sonata-project/google-authenticator": "^1.0",
+        "sonata-project/translation-bundle": "^2.0"
        
     },
     "require-dev": {

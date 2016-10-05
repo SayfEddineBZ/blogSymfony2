@@ -29,7 +29,7 @@ class BlogAdmin extends AbstractAdmin {
             'property' => 'username',
         ))
         ;
-        $formMapper->add('image', 'file');
+        $formMapper->add('image', 'file', array('data_class' => null));
         $formMapper->add('blog', 'textarea');
         //$formMapper->add('image', 'file', array('data_class' => 'Blogger\BlogBundle\Entity\Image'));
         $formMapper->add('tags', 'text');

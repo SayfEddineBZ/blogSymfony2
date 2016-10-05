@@ -78,7 +78,7 @@ class Blog {
     private $updated;
 
     public function __construct() {
-        $this->comments = new ArrayCollection();
+        //$this->comments = new ArrayCollection();
 
         $this->setCreated(new \DateTime());
         $this->setUpdated(new \DateTime());
@@ -267,6 +267,52 @@ class Blog {
      */
     public function getUpdated() {
         return $this->updated;
+    }
+
+    /* Upload image* */
+
+    public function getAbsolutePath() {
+        return null === $this->imageName ? null : $this->getUploadRootDir() . '/' . $this->imageName;
+    }
+
+    public function getWebPath() {
+        return null === $this->imageName ? null : $this->getUploadDir() . '/' . $this->imageName;
+    }
+
+    protected function getUploadRootDir($basepath) {
+        // the absolute directory path where uploaded documents should be saved
+        return $basepath . $this->getUploadDir();
+    }
+
+    protected function getUploadDir() {
+        // get rid of the __DIR__ so it doesn't screw when displaying uploaded doc/image in the view.
+        return 'uploads/images';
+    }
+
+    public function upload($basepath) {
+        // the file property can be empty if the field is not required
+        if (null === $this->image) {
+            return;
+        }
+
+        if (null === $basepath) {
+            return;
+        }
+
+        // we use the original file name here but you should
+        // sanitize it at least to avoid any security issues
+        // move takes the target directory and then the target filename to move to
+        $this->image->move($this->getUploadRootDir($basepath), $this->image->getClientOriginalName());
+
+        // set the path property to the filename where you'ved saved the file
+        var_dump($this->image->getClientOriginalName());
+        //var_dump($this->setImage("blo"));
+        
+        //$this->image->setImageName($this->file->getClientOriginalName());
+        $this->image=$this->image->getClientOriginalName();
+        
+        // clean up the file property as you won't need it anymore
+        //$this->image = null;
     }
 
 }

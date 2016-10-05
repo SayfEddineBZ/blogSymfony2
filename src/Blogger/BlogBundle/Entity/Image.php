@@ -11,6 +11,8 @@
  *
  * @author sayfeddine
  */
+namespace Blogger\BlogBundle\Entity;
+
 class Image {
 
     const SERVER_PATH_TO_IMAGE_FOLDER = '/web/uploads/images';

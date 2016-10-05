@@ -18,7 +18,6 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-
 use Blogger\BlogBundle\Image;
 
 class BlogAdmin extends AbstractAdmin {
@@ -30,11 +29,9 @@ class BlogAdmin extends AbstractAdmin {
             'property' => 'username',
         ))
         ;
-//         $formMapper->add('linkedImage1', 'sonata_type_admin', array(
-//                'delete' => false
-//            ));
-        $formMapper->add('blog', 'textarea');
         $formMapper->add('image', 'file');
+        $formMapper->add('blog', 'textarea');
+        //$formMapper->add('image', 'file', array('data_class' => 'Blogger\BlogBundle\Entity\Image'));
         $formMapper->add('tags', 'text');
 //        $formMapper->add('comments', 'text');
 //        $formMapper->add('created', 'datetime');
@@ -49,44 +46,24 @@ class BlogAdmin extends AbstractAdmin {
     protected function configureListFields(ListMapper $listMapper) {
         $listMapper->addIdentifier('title');
         $listMapper->addIdentifier('author');
-        $listMapper->addIdentifier('image');
+        //$listMapper->addIdentifier('image');
         $listMapper->addIdentifier('tags');
         $listMapper->addIdentifier('comments');
+        $listMapper->addIdentifier('created');
+        $listMapper->addIdentifier('updated');
     }
 
-    public function prePersist($page) {
-        $this->manageEmbeddedImageAdmins($page);
+    public function prePersist($product) {
+        $this->saveFile($product);
     }
 
-    public function preUpdate($page) {
-        $this->manageEmbeddedImageAdmins($page);
+    public function preUpdate($product) {
+        $this->saveFile($product);
     }
 
-    private function manageEmbeddedImageAdmins($page) {
-        // Cycle through each field
-        foreach ($this->getFormFieldDescriptions() as $fieldName => $fieldDescription) {
-            // detect embedded Admins that manage Images
-            if ($fieldDescription->getType() === 'sonata_type_admin' &&
-                    ($associationMapping = $fieldDescription->getAssociationMapping()) &&
-                    $associationMapping['targetEntity'] === 'Blogger\BlogBundle\Entity\Image'
-            ) {
-                $getter = 'get' . $fieldName;
-                $setter = 'set' . $fieldName;
-
-                /** @var Image $image */
-                $image = $page->$getter();
-
-                if ($image) {
-                    if ($image->getFile()) {
-                        // update the Image to trigger file management
-                        $image->refreshUpdated();
-                    } elseif (!$image->getFile() && !$image->getFilename()) {
-                        // prevent Sf/Sonata trying to create and persist an empty Image
-                        $page->$setter(null);
-                    }
-                }
-            }
-        }
+    public function saveFile($product) {
+        $basepath = $this->getRequest()->getBasePath();
+        $product->upload($basepath);
     }
 
 }
